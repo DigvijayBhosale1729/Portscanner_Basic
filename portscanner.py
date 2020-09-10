@@ -31,7 +31,7 @@ def portscan(tgthost,tgtports):
         connscanTCP(tgthost,tgtport)
 
 def main():
-    parser=optparse.OptionParser('Usage python portscanner.py -h <target host> -t <type of scan h for half(<500), f for full(<1000) and e for all ports(All 65535)')
+    parser=optparse.OptionParser('Usage python portscanner.py -h <target host> -t <type of scan h for half(<500), f for full(<1000) and e for all ports(All 65535)>')
     parser.add_option('-H', dest='tgthost', type='string', help='Specify Target Host')
     parser.add_option('-t', dest='scan', type='string', help='Specify Type of scan h for half(<500), f for full(<1000) and e for all ports(All 65535)')
 
