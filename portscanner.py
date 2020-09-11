@@ -31,7 +31,8 @@ def portscan(tgthost,tgtports):
         print("Results for : ", tgtip)
 
     for tgtport in tgtports:
-        threading.Thread(target=connscanTCP,args=(tgthost,tgtport))
+        t=threading.Thread(target=connscanTCP,args=(tgthost,tgtport))
+        t.start()
         
 def main():
     parser=optparse.OptionParser('Usage python portscanner.py -h <target host> -t <type of scan h for half(<500), f for full(<1000) and e for all ports(All 65535)>')
