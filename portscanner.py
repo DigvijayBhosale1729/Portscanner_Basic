@@ -1,3 +1,5 @@
+#Made by FoxSinOfGreed1729
+#Many Thanks to TJ O'Connor, author of Violent Python
 import sys
 import os
 import optparse
