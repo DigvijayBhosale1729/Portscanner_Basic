@@ -2,6 +2,7 @@ import sys
 import os
 import optparse
 import socket
+import threading
 
 def connscanTCP(tgthost,tgtport):
     try:
@@ -28,8 +29,8 @@ def portscan(tgthost,tgtports):
         print("Results for : ", tgtip)
 
     for tgtport in tgtports:
-        connscanTCP(tgthost,tgtport)
-
+        threading.Thread(target=connscanTCP,args=(tgthost,tgtport))
+        
 def main():
     parser=optparse.OptionParser('Usage python portscanner.py -h <target host> -t <type of scan h for half(<500), f for full(<1000) and e for all ports(All 65535)>')
     parser.add_option('-H', dest='tgthost', type='string', help='Specify Target Host')
