@@ -5,15 +5,15 @@ import socket
 
 def connscanTCP(tgthost,tgtport):
     try:
-        sock1=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        sock1.connect((tgthost,tgtport))
-        print("Port : ",tgtport," is open")
-        sock1.send('any random string \r\n')
-        baninfo=sock1.recv(100)
-        print("Service :", baninfo)
-        sock1.close()    
+        flag=sock1.connect_ex((tgthost,tgtport))
+        if flag==0:
+            print("Port : ",tgtport," is open")
+            sock1.send('any random string \r\n')
+            baninfo=sock1.recv(100)
+            print("Service ",baninfo)
+            sock1.close()   
     except:
-        print('Port', tgtport,'Is closed')
+        print("Connection error")
 
 def portscan(tgthost,tgtports):
     try:
