@@ -6,15 +6,19 @@ import optparse
 import socket
 import threading
 
+n=0
+allowed=threading.Semaphore(value=1)
 def connscanTCP(tgthost,tgtport):
     try:
         flag=sock1.connect_ex((tgthost,tgtport))
         if flag==0:
-            print("Port : ",tgtport," is open")
             sock1.send('any random string \r\n')
             baninfo=sock1.recv(100)
+            allowed.acquire()
+            print("Port : ",tgtport," is open")
             print("Service ",baninfo)
-            sock1.close()   
+            sock1.close()
+            n=n+1
     except:
         print("Connection error")
 
@@ -22,8 +26,12 @@ def portscan(tgthost,tgtports):
     try:
         tgtip=socket.gethostbyname(tgthost)
     except:
-        print("Hostname could not be resolved")
-        return
+        try:
+            tgtip= str(tgthost)
+            if tgtip[0].isdigit():
+                tgtip=tgthost
+        except:
+            print("Error in IP")
     try:
         tgtname=socket.gethostbyaddr(tgtip)
         print("Results for : ", tgtname[0])
@@ -56,5 +64,6 @@ def main():
         for i in range(20,65535):
             portlist.append(i)
     portscan(tgthost,portlist)
-
+    print(n," Ports open")
+    exit(0)
 main()
